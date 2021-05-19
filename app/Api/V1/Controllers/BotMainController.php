@@ -36,7 +36,7 @@ class BotMainController extends BaseController
             ]) ? "success" : "Error setting the webhook";
         } catch (\Throwable $th) {
             //throw $th;
-            Log::info("Error setting the webhook");
+            Log::info("Error setting the webhook ==== >" . $th->getMessage());
         }
     }
 
