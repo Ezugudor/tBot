@@ -34,6 +34,11 @@ $api->version(
             'uses' => 'BotMainController@webhook',
         ]);
 
+        $api->get('get_webhook', [
+            'as' => 'authorization.user',
+            'uses' => 'BotMainController@getWebhook',
+        ]);
+
         $api->get('/', [
             'as' => 'webhook',
             'uses' => 'BotMainController@index',

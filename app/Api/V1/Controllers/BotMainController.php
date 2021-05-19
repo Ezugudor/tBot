@@ -48,6 +48,23 @@ class BotMainController extends BaseController
         }
     }
 
+    public function getWebhook(Request $request)
+    {
+
+        try {
+
+            $res = $this->networkRequest("getWebhookInfo");
+            $a = $res->ok ? "success" : "Error setting the webhook";
+            Log::info("respose ==== >" . json_encode($res));
+            Log::info("respose ==== >" . $res->ok);
+            // Log::info("respose ==== >" . $res->error_code);
+            return $a;
+        } catch (\Throwable $th) {
+            //throw $th;
+            Log::info("Error getting the webhook info ==== >" . $th->getMessage());
+        }
+    }
+
     public function index(Request $request)
     {
         Log::info("reached index");
