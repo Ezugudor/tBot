@@ -39,7 +39,7 @@ $api->version(
             'uses' => 'BotMainController@getWebhook',
         ]);
 
-        $api->get('/', [
+        $api->post('/', [
             'as' => 'webhook',
             'uses' => 'BotMainController@index',
         ]);
