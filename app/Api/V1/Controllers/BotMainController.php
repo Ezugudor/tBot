@@ -40,7 +40,7 @@ class BotMainController extends BaseController
             $a = $res->ok ? "success" : "Error setting the webhook";
             Log::info("respose ==== >" . json_encode($res));
             Log::info("respose ==== >" . $res->ok);
-            Log::info("respose ==== >" . $res->error_code);
+            // Log::info("respose ==== >" . $res->error_code);
             return $a;
         } catch (\Throwable $th) {
             //throw $th;
@@ -57,6 +57,7 @@ class BotMainController extends BaseController
 
             $requestData = json_decode(file_get_contents("php://input"));
 
+            Log::info("reached data  ===> " . json_encode($requestData));
             $action = $requestData->message->text;
             $userID = $requestData->message->from->id;
 
