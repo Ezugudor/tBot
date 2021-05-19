@@ -35,7 +35,7 @@ $api->version(
         ]);
 
         $api->get('/', [
-            'as' => 'authorization.index',
+            'as' => 'webhook',
             'uses' => 'BotMainController@index',
         ]);
     }

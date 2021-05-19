@@ -28,6 +28,7 @@ class BotMainController extends BaseController
     public function webhook(Request $request)
     {
 
+        Log::info("reached webhook");
         try {
 
             $this->networkRequest("setWebhook", [
@@ -41,6 +42,7 @@ class BotMainController extends BaseController
 
     public function index(Request $request)
     {
+        Log::info("reached index");
 
         try {
 
