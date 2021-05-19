@@ -29,14 +29,14 @@ $api->version(
          * Users Route
          */
 
-        $api->get('user', [
+        $api->get('webhook', [
             'as' => 'authorization.user',
-            'uses' => 'UserController@findAll',
+            'uses' => 'BotMainController@webhook',
         ]);
 
-        $api->get('user/{id}', [
-            'as' => 'authorization.show',
-            'uses' => 'UserController@find',
+        $api->get('/', [
+            'as' => 'authorization.index',
+            'uses' => 'BotMainController@index',
         ]);
     }
 );
