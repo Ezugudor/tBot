@@ -14,7 +14,7 @@ trait HttpApi
 
         $Key = config('services.bot_key');
 
-        Log::info("Bot key ==== " . $Key);
+        Log::info("aBot key ==== " . $Key);
 
         $CurrentEndpoint = "/{$method}";
 
