@@ -12,7 +12,7 @@ trait HttpApi
     {
         $BaseEndPoint =  "https://api.telegram.org/bot";
 
-        $Key = config('BOT_KEY');
+        $Key = config('services.bot_key');
 
         Log::info("Bot key ==== " . $Key);
 

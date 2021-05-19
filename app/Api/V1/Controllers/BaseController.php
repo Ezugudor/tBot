@@ -5,11 +5,12 @@ namespace App\Api\V1\Controllers;
 use Dingo\Api\Routing\Helpers;
 use Dingo\Api\Exception\ValidationHttpException;
 use App\Api\V1\Traits\HttpStatusResponse;
+use App\Api\V1\Traits\NamedRouteGen;
 
 class BaseController
 {
     // Interface help call
-    use Helpers, HttpStatusResponse;
+    use Helpers, HttpStatusResponse, NamedRouteGen;
 
     // Returns the wrong request
     protected function errorBadRequest($validator)

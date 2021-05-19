@@ -34,5 +34,5 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    'bot_key' => env('BOT_KEY'),
 ];

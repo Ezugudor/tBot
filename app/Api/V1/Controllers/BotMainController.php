@@ -29,11 +29,19 @@ class BotMainController extends BaseController
     {
 
         Log::info("reached webhook");
+        $webhook = $this->getNamedRoute('webhook');
+
+        Log::info($webhook);
         try {
 
-            $this->networkRequest("setWebhook", [
-                'url' => url(route('webhook'))
-            ]) ? "success" : "Error setting the webhook";
+            $res = $this->networkRequest("setWebhook", [
+                'url' => url($webhook)
+            ]);
+            $a = $res->ok ? "success" : "Error setting the webhook";
+            Log::info("respose ==== >" . json_encode($res));
+            Log::info("respose ==== >" . $res->ok);
+            Log::info("respose ==== >" . $res->error_code);
+            return $a;
         } catch (\Throwable $th) {
             //throw $th;
             Log::info("Error setting the webhook ==== >" . $th->getMessage());
