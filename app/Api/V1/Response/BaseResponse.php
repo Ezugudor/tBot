@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Api\V1\Response;
+namespace App\Api\V1\Responses;
 
 class BaseResponse
 {

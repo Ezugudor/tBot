@@ -7,13 +7,12 @@ use App\Api\V1\Responses\BaseResponse;
 
 
 
-class StartResponse extends BaseResponse
+class FirstnameResponse extends BaseResponse
 {
     private $details;
     public function __construct($details)
     {
         $this->setDetails($details);
-        return $this->getResponse();
     }
 
     public function setDetails($details)
@@ -26,7 +25,7 @@ class StartResponse extends BaseResponse
 
         return  [
             'chat_id' => $this->details->user_id,
-            'text' => "_Welcome_ [{$this->details->user_firstname}](http://google.com) *bot* [__Goto your profile__](tg://user?id={$this->details->user_id})",
+            'text' => "Your firstname : ",
             'parse_mode' => 'MarkdownV2',
             'reply_markup' => $this->keyboardBtn()
         ];
@@ -42,23 +41,6 @@ class StartResponse extends BaseResponse
             'resize_keyboard' => true,
             'one_time_keyboard' => false,
             'selective' => true,
-        ];
-
-        $keyboard = [
-            'inline_keyboard' => [
-                [
-                    ['text' => '/join'],
-                    // ['text' => 'Goto Unitrade', 'url' => 'http://t.me/UniTradeApp']
-                ],
-                [
-                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
-                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
-                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
-                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
-                    ['text' => 'Goto Unitrade', 'url' => 'http://t.me/UniTradeApp']
-                ]
-            ]
-
         ];
 
         $keyboard = json_encode($keyboard);
