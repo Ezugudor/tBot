@@ -16,6 +16,23 @@ trait Components
             'selective' => true,
         ];
 
+        $keyboard = [
+            'inline_keyboard' => [
+                [
+                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
+                    // ['text' => 'Goto Unitrade', 'url' => 'http://t.me/UniTradeApp']
+                ],
+                [
+                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
+                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
+                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
+                    ['text' => 'Goto Google', 'url' => 'http://google.com'],
+                    ['text' => 'Goto Unitrade', 'url' => 'http://t.me/UniTradeApp']
+                ]
+                ]
+                
+        ];
+
         $keyboard = json_encode($keyboard);
 
 

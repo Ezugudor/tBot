@@ -67,31 +67,59 @@ class BotMainController extends BaseController
 
     public function index(Request $request)
     {
-        Log::info("reached index");
 
         try {
 
 
             $requestData = json_decode(file_get_contents("php://input"));
-
             Log::info("reached data  ===> " . json_encode($requestData));
-            $action = $requestData->message->text;
-            $userID = $requestData->message->from->id;
+            if(property_exists($requestData,'message')){
+                $action = $requestData->message->text;
+                $userID = $requestData->message->from->id;
+                $userFirstname = $requestData->message->from->first_name;
+            }else{
+                $action = $requestData->callback_query->data;
+                $userID = $requestData->callback_query->from->id;
+                $userFirstname = $requestData->callback_query->from->first_name;
+            }
+          
 
             if ($action === "/start") {
-                $text = "Welcome to ezugudor bot";
-                $options = [['CSS', 'HTML'], ['Java', 'Javascript']];
+                $text = "_Welcome_ to [{$userFirstname}](http://google.com) *bot* [__Goto your profile__](tg://user?id={$userID})";
+                // $options = [['CSS', "\xF0\x9F\x8C\x8D HTML"], ['Java', "Javasncript"],['Angular']];
+                $options = [['Java', "Javasncript"],['Angular']];
             }
+
+            
+            $pathExist = file_exists('../resources/img/promo2.jpeg');
+            $path = '../resources/img/promo1.jpeg';
+            Log::info("check file exist  ===> " . json_encode($pathExist));
+
+            // $this->networkRequest(
+            //     "sendMessage",
+            //     [
+            //         'chat_id' => $userID,
+            //         'text' => $text,
+            //         'parse_mode'=>'MarkdownV2',
+            //         'reply_markup' => $this->keyboardBtn($options),
+            //     ]
+            // );
             $this->networkRequest(
-                "sendMessage",
+                "sendPhoto",
+                (object)['imagePath'=>$path, 'imageMimeType'=>'image/webp','imageOriginalName'=>'ads.jpeg'],
                 [
                     'chat_id' => $userID,
-                    'text' => $text,
-                    'reply_markup' => $this->keyboardBtn($options)
+                    'caption' => $text,
+                    'parse_mode'=>'MarkdownV2',
+                    'reply_markup' => $this->keyboardBtn($options),
                 ]
             );
         } catch (\Throwable $th) {
             //throw $th;
+            Log::info("error data  ===> " . $th->getMessage());
+            Log::info("error data  ===> " . json_encode($th));
+            Log::info($th);
+
         }
     }
 }
