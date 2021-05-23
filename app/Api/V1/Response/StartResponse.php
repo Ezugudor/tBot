@@ -1,15 +1,15 @@
 <?php
 
 
-namespace App\Api\V1\Controllers;
+namespace App\Api\V1\Responses;
 
-use App\Api\V1\Response\BaseResponse;
+use App\Api\V1\Responses\BaseResponse;
 
 
 
 class StartResponse extends BaseResponse
 {
-    private $details;
+    public $details;
     public function __construct($details)
     {
         $this->setDetails($details);
@@ -18,7 +18,7 @@ class StartResponse extends BaseResponse
 
     public function setDetails($details)
     {
-        $this->details = $details;
+        $this->details = (object) $details;
     }
 
     public function getResponse()
@@ -32,7 +32,7 @@ class StartResponse extends BaseResponse
         ];
     }
 
-    private function keyboardBtn()
+    public function keyboardBtn()
     {
         // $options = [['Java', "Javasncript"], ['Angular']];
         $options = [['CSS', "\xF0\x9F\x8C\x8D HTML"], ['Java', "Javasncript"], ['Angular']];

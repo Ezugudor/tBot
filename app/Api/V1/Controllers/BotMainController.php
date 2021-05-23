@@ -3,6 +3,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Responses\StartResponse;
 use App\Api\V1\Traits\Components;
 use App\Api\V1\Traits\HttpApi;
 use Illuminate\Http\Request;
@@ -87,9 +88,12 @@ class BotMainController extends BaseController
             if ($action === "/start") {
                 $reqPayload = ['user_id' => $userID, 'user_firstname' => $userFirstname];
                 $responseTemplate = new StartResponse($reqPayload);
+                $aa = $responseTemplate->getResponse();
+                Log::info("template data  ===> " . json_encode($aa));
+
                 $this->networkRequest(
                     "sendMessage",
-                    $responseTemplate
+                    $aa
                 );
 
                 // $pathExist = file_exists('../resources/img/promo2.jpeg');
