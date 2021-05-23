@@ -3,6 +3,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Responses\FirstnameResponse;
 use App\Api\V1\Responses\StartResponse;
 use App\Api\V1\Traits\Components;
 use App\Api\V1\Traits\HttpApi;
@@ -84,16 +85,42 @@ class BotMainController extends BaseController
                 $userFirstname = $requestData->callback_query->from->first_name;
             }
 
+            switch ($action) {
+                case '/start':
+                    $reqPayload = ['user_id' => $userID, 'user_firstname' => $userFirstname];
+                    $responseTemplate = new StartResponse($reqPayload);
+                    $this->networkRequest(
+                        "sendMessage",
+                        $responseTemplate
+                    );
+                    break;
+                case '/join':
+                    $reqPayload = ['user_id' => $userID, 'user_firstname' => $userFirstname];
+                    $responseTemplate = new FirstnameResponse($reqPayload);
+
+                    $pathExist = file_exists('../resources/img/promo2.jpeg');
+                    $path = '../resources/img/promo1.jpeg';
+                    Log::info("check file exist  ===> " . json_encode($pathExist));
+                    $this->networkRequest(
+                        "sendPhoto",
+                        (object)['imagePath' => $path, 'imageMimeType' => 'image/webp', 'imageOriginalName' => 'ads.jpeg'],
+                        $responseTemplate
+                    );
+
+
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
 
             if ($action === "/start") {
                 $reqPayload = ['user_id' => $userID, 'user_firstname' => $userFirstname];
                 $responseTemplate = new StartResponse($reqPayload);
-                $aa = $responseTemplate->getResponse();
-                Log::info("template data  ===> " . json_encode($aa));
-
                 $this->networkRequest(
                     "sendMessage",
-                    $aa
+                    $responseTemplate
                 );
 
                 // $pathExist = file_exists('../resources/img/promo2.jpeg');
