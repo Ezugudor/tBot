@@ -59,12 +59,14 @@ trait HttpApi
             ->withFile('photo', $fileObj->imagePath, $fileObj->imageMimeType, $fileObj->imageOriginalName)
             ->post();
 
+            return  $TokenResponse;
+
         } catch (\Throwable $th) {
             Log::info("error file === ".json_encode($th));
         }
        
 
 
-        return  $TokenResponse;
+        
     }
 }

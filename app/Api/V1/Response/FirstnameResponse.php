@@ -17,7 +17,7 @@ class FirstnameResponse extends BaseResponse
 
     public function setDetails($details)
     {
-        $this->details = $details;
+        $this->details = (object) $details;
     }
 
     public function getResponse()

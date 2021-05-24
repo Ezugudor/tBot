@@ -47,7 +47,7 @@ class StartResponse extends BaseResponse
         $keyboard = [
             'inline_keyboard' => [
                 [
-                    ['text' => '/join'],
+                    ['text' => 'Join Us','callback_data'=>'/join'],
                     // ['text' => 'Goto Unitrade', 'url' => 'http://t.me/UniTradeApp']
                 ],
                 [

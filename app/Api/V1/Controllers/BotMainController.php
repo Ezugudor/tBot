@@ -89,14 +89,16 @@ class BotMainController extends BaseController
                 case '/start':
                     $reqPayload = ['user_id' => $userID, 'user_firstname' => $userFirstname];
                     $responseTemplate = new StartResponse($reqPayload);
+                    $resMessage = $responseTemplate->getResponse();
                     $this->networkRequest(
                         "sendMessage",
-                        $responseTemplate
+                        $resMessage
                     );
                     break;
                 case '/join':
                     $reqPayload = ['user_id' => $userID, 'user_firstname' => $userFirstname];
                     $responseTemplate = new FirstnameResponse($reqPayload);
+                    $resMessage = $responseTemplate->getResponse();
 
                     $pathExist = file_exists('../resources/img/promo2.jpeg');
                     $path = '../resources/img/promo1.jpeg';
@@ -104,7 +106,7 @@ class BotMainController extends BaseController
                     $this->networkRequest(
                         "sendPhoto",
                         (object)['imagePath' => $path, 'imageMimeType' => 'image/webp', 'imageOriginalName' => 'ads.jpeg'],
-                        $responseTemplate
+                        $resMessage
                     );
 
 
@@ -115,28 +117,7 @@ class BotMainController extends BaseController
                     break;
             }
 
-            if ($action === "/start") {
-                $reqPayload = ['user_id' => $userID, 'user_firstname' => $userFirstname];
-                $responseTemplate = new StartResponse($reqPayload);
-                $this->networkRequest(
-                    "sendMessage",
-                    $responseTemplate
-                );
-
-                // $pathExist = file_exists('../resources/img/promo2.jpeg');
-                // $path = '../resources/img/promo1.jpeg';
-                // Log::info("check file exist  ===> " . json_encode($pathExist));
-                // $this->networkRequest(
-                //     "sendPhoto",
-                //     (object)['imagePath' => $path, 'imageMimeType' => 'image/webp', 'imageOriginalName' => 'ads.jpeg'],
-                //     [
-                //         'chat_id' => $userID,
-                //         'caption' => $text,
-                //         'parse_mode' => 'MarkdownV2',
-                //         'reply_markup' => $this->keyboardBtn($options),
-                //     ]
-                // );
-            }
+           
         } catch (\Throwable $th) {
             //throw $th;
             Log::info("error data  ===> " . $th->getMessage());
